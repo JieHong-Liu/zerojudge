@@ -50,7 +50,7 @@ int main()
 
             if (operator== '+')
             {
-                ans[i] = a[i] + b[i];
+                ans[i] = asc2int(a[i]) + asc2int(b[i]);
                 printf("Here is plus\n");
                 printf("The a[i] here is %d, The b[i] here is %d \n", a[i], b[i]);
                 printf("The i here is %d, The ans[i] here is %c \n", i, asc2int(ans[i]));
