@@ -15,7 +15,8 @@ int asc2int(char c)
     return c;
 }
 
-void add(char *a, char *b, char *ans)
+void solvearrays(char *a, char *b)
+
 {
     int a_size = strlen(a);
     int b_size = strlen(b);
@@ -31,10 +32,10 @@ void add(char *a, char *b, char *ans)
         {
             b[i] = '0';
         }
-        for (int i = 0; i < b_size + difference; i++)
-        {
-            printf("%c", b[i]);
-        }
+        // for (int i = 0; i < b_size + difference; i++)
+        // {
+        //     printf("%c", b[i]);
+        // }
         printf("\n");
     }
     else if (difference < 0)
@@ -50,19 +51,54 @@ void add(char *a, char *b, char *ans)
         {
             a[i] = '0';
         }
-        for (int i = 0; i < a_size + difference; i++)
-        {
-            printf("%c", a[i]);
-        }
+        // for (int i = 0; i < a_size + difference; i++)
+        // {
+        //     printf("%c", a[i]);
+        // }
         printf("\n");
     }
-    for (int i = (strlen(a) - 1); i >= 0; i--)
+}
+void add(char *a, char *b, char *ans)
+{
+    if (strlen(a) >= strlen(b))
     {
-        ans[i] = a[i] + b[i];
-        printf("i here is %d,  ans[i] by decimal is %d and asc[i] by char is %c\n", i, ans[i], ans[i]);
-        printf("i here is %d,  asc2int(ans[i]) by decimal is %d and asc2int(asc[i]) by char is %c\n", i, asc2int(ans[i]), asc2int(ans[i]));
+
+        for (int i = (strlen(a) - 1); i >= 0; i--)
+        {
+            ans[i] = asc2int(a[i]) + asc2int(b[i]);
+        }
+    }
+    else if (strlen(a) < strlen(b))
+    {
+        for (int i = (strlen(a) - 1); i >= 0; i--)
+        {
+            ans[i] = asc2int(a[i]) + asc2int(b[i]);
+        }
+    }
+
+    for (int i = strlen(ans) - 1; i >= 0; i--)
+    {
+        if (ans[i] >= 10 && i != 0)
+        {
+            ans[i - 1] = ans[i - 1] + (ans[i] / 10);
+            ans[i] = ans[i] % 10;
+        }
+        printf("%d .", ans[i]);
+    }
+    printf("\n");
+    if (ans[0] >= 10)
+    {
+        for (int i = (strlen(ans) - 1); i >= 0; i--)
+        {
+            a[i + 1] = a[i];
+        }
+    }
+    for (int i = 0; i < strlen(ans); i++)
+    {
+        printf("%d", ans[i]);
     }
 }
+void substract_array(char *a, char *b, char *ans);
 int main()
 {
     char a[500] = {0}; // A
@@ -74,42 +110,12 @@ int main()
         int a_size = strlen(a);
         int b_size = strlen(b);
         int difference = a_size - b_size; // 代表相差幾位數，相差幾位數就要讓比較小的那個陣列往後幾格，前面記得補0
-        add(a, b, ans);
-
-        // for (int i = (strlen(a) - 1); i >= 0; i--)
-        // {
-        //     printf("The a[i] before change is %d, The b[i] before change is %d \n", a[i], b[i]);
-
-        //     if (operator== '+')
-        //     {
-        //         ans[i] = a[i] + b[i];
-        //         printf("Here is plus\n");
-        //         printf("The a[i] here is %d, The b[i] here is %d \n", a[i], b[i]);
-        //         printf("The i here is %d, The ans[i] here is %c \n", i, asc2int(ans[i]));
-        //     }
-        //     else if (operator== '-')
-        //     {
-        //         a[i] -= b[i];
-        //         printf("Here is minus\n");
-        //     }
-
-        //     if (a[i] >= 10 && i != 0)
-        //     {
-        //         a[i - 1] += a[i] / 10;
-        //         a[i] = a[i] % 10;
-        //     }
-        // }
-        // 如果a[0]>10 每一位都要往後放一位
-        // if (a[0] >= 10)
-        // {
-        //     for (int i = 498; i >= 0; i--)
-        //     {
-        //         a[i + 1] = a[i];
-        //     }
-        // }
-        for (int i = 0; i < strlen(a); i++)
+        solvearrays(a, b);
+        switch (operator)
         {
-            printf("%c", asc2int(ans[i]));
+        case '+':
+            add(a, b, ans);
+            break;
         }
     }
     return 0;
