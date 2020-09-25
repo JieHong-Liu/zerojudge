@@ -8,33 +8,33 @@
 #include <stdio.h>
 int main()
 {
-  int number;
-  scanf("%d", &number);
-  for (int i = 2; i <= number; i++)
-  {
-    int times = 0;
-    while (number % i == 0)
+    int number;
+    scanf("%d", &number);
+    for (int i = 2; i <= number; i++)
     {
-      number /= i;
-      times++;
+        int times = 0;
+        while (number % i == 0)
+        {
+            number /= i;
+            times++;
+        }
+        if (times != 1 && times != 0)
+        {
+            printf("%d^%d", i, times);
+            if (number != 1)
+            {
+                printf(" * ");
+            }
+        }
+        else if (times == 1)
+        {
+            printf("%d", i);
+            if (number != 1)
+            {
+                printf(" * ");
+            }
+        }
     }
-    if (times != 1 && times != 0)
-    {
-      printf("%d^%d", i, times);
-      if (number != 1)
-      {
-        printf(" * ");
-      }
-    }
-    else if (times == 1)
-    {
-      printf("%d", i);
-      if (number != 1)
-      {
-        printf(" * ");
-      }
-    }
-  }
-  printf("\n");
-  return 0;
+    printf("\n");
+    return 0;
 }

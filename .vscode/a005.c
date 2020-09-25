@@ -3,32 +3,32 @@
 
 int main()
 {
-  int row = 0;
-  scanf("%d", &row);
-  int d, r;
-  for (int i = 0; i < row; i++)
-  {
-    int a[5] = {};
+    int row = 0;
+    scanf("%d", &row);
+    int d, r;
+    for (int i = 0; i < row; i++)
+    {
+        int a[5] = {};
 
-    for (int j = 0; j < 4; j++)
-    {
-      scanf("%d", &a[j]);
+        for (int j = 0; j < 4; j++)
+        {
+            scanf("%d", &a[j]);
+        }
+        d = a[3] - a[2];
+        r = a[3] / a[2];
+        if (d == a[1] - a[0])
+        {
+            a[4] = a[3] + d;
+        }
+        else if (r == a[1] / a[0])
+        {
+            a[4] = a[3] * r;
+        }
+        for (int j = 0; j < 5; j++)
+        {
+            printf("%d ", a[j]);
+        }
+        printf("\n");
     }
-    d = a[3] - a[2];
-    r = a[3] / a[2];
-    if (d == a[1] - a[0])
-    {
-      a[4] = a[3] + d;
-    }
-    else if (r == a[1] / a[0])
-    {
-      a[4] = a[3] * r;
-    }
-    for (int j = 0; j < 5; j++)
-    {
-      printf("%d ", a[j]);
-    }
-    printf("\n");
-  }
-  return 0;
+    return 0;
 }

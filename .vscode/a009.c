@@ -1,17 +1,17 @@
 #include <stdio.h>
 int main()
 {
-  char K = -7; // 解碼用
-  char original[1000] = {0};
+    char K = -7; // 解碼用
+    char original[1000] = {0};
 
-  scanf("%s", original);
+    scanf("%s", original);
 
-  for (int i = 0; original[i] != '\0'; i++)
-  {
-    original[i] = original[i] + K;
-  }
+    for (int i = 0; original[i] != '\0'; i++)
+    {
+        original[i] = original[i] + K;
+    }
 
-  printf("%s", original);
+    printf("%s", original);
 
-  return 0;
+    return 0;
 }

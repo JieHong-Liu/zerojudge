@@ -32,10 +32,7 @@ void solvearrays(char *a, char *b)
         {
             b[i] = '0';
         }
-        // for (int i = 0; i < b_size + difference; i++)
-        // {
-        //     printf("%c", b[i]);
-        // }
+
         printf("\n");
     }
     else if (difference < 0)
@@ -51,54 +48,93 @@ void solvearrays(char *a, char *b)
         {
             a[i] = '0';
         }
-        // for (int i = 0; i < a_size + difference; i++)
-        // {
-        //     printf("%c", a[i]);
-        // }
+
         printf("\n");
     }
 }
 void add(char *a, char *b, char *ans)
 {
-    if (strlen(a) >= strlen(b))
-    {
 
-        for (int i = (strlen(a) - 1); i >= 0; i--)
-        {
-            ans[i] = asc2int(a[i]) + asc2int(b[i]);
-        }
-    }
-    else if (strlen(a) < strlen(b))
+    for (int i = (strlen(a) - 1); i >= 0; i--) // size is the same, so it doesn't matter who is bigger.
     {
-        for (int i = (strlen(a) - 1); i >= 0; i--)
-        {
-            ans[i] = asc2int(a[i]) + asc2int(b[i]);
-        }
+        ans[i] = asc2int(a[i]) + asc2int(b[i]);
     }
 
-    for (int i = strlen(ans) - 1; i >= 0; i--)
+    int ans_size = strlen(a);
+
+    for (int i = ans_size - 1; i >= 0; i--)
     {
         if (ans[i] >= 10 && i != 0)
         {
             ans[i - 1] = ans[i - 1] + (ans[i] / 10);
             ans[i] = ans[i] % 10;
         }
-        printf("%d .", ans[i]);
     }
-    printf("\n");
-    if (ans[0] >= 10)
-    {
-        for (int i = (strlen(ans) - 1); i >= 0; i--)
-        {
-            a[i + 1] = a[i];
-        }
-    }
-    for (int i = 0; i < strlen(ans); i++)
+
+    for (int i = 0; i < ans_size; i++)
     {
         printf("%d", ans[i]);
     }
 }
 
+void bignum_Reverse(char *a) /*倒轉儲存大數*/
+{
+    int len, i, temp;
+    for (i = 0; i < 500; i++)
+    {
+        if (a[i] == '\0')
+            break;
+        a[i] = a[i] - '0';
+    }
+    len = i;
+    a[len] = 0;
+    for (i = 0; i < len; i++)
+    {
+        if (i >= len / 2)
+            break;
+        temp = a[i];
+        a[i] = a[len - 1 - i];
+        a[len - 1 - i] = temp;
+    }
+}
+// a 如果比 b 小，傳回0
+int bigger(char *a, char *b)
+{
+    int a_size, b_size;
+    for (int i = 499; i > 0; i++)
+    {
+        if (a[i] != 0)
+        {
+            break;
+        }
+        a_size = i;
+    }
+    for (int i = 499; i > 0; i++)
+    {
+        if (b[i] != 0)
+        {
+            break;
+        }
+        b_size = i;
+    }
+    if (a_size > b_size)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+void substract(char *a, char *b, char *ans)
+{
+    int borrow = 0;
+
+    for (int i = 0; i < strlen(ans); i++)
+    {
+        printf("%d ", ans[i]);
+    }
+}
 int main()
 {
     char a[500] = {0}; // A
@@ -110,40 +146,18 @@ int main()
         int a_size = strlen(a);
         int b_size = strlen(b);
         int difference = a_size - b_size; // 代表相差幾位數，相差幾位數就要讓比較小的那個陣列往後幾格，前面記得補0
-        solvearrays(a, b);
-        add(a, b, ans);
-
-        // for (int i = (strlen(a) - 1); i >= 0; i--)
-        // {
-        //     printf("The a[i] before change is %d, The b[i] before change is %d \n", a[i], b[i]);
-
-        //     if (operator== '+')
-        //     {
-        //         ans[i] = a[i] + b[i];
-        //         printf("Here is plus\n");
-        //         printf("The a[i] here is %d, The b[i] here is %d \n", a[i], b[i]);
-        //         printf("The i here is %d, The ans[i] here is %c \n", i, asc2int(ans[i]));
-        //     }
-        //     else if (operator== '-')
-        //     {
-        //         a[i] -= b[i];
-        //         printf("Here is minus\n");
-        //     }
-
-        //     if (a[i] >= 10 && i != 0)
-        //     {
-        //         a[i - 1] += a[i] / 10;
-        //         a[i] = a[i] % 10;
-        //     }
-        // }
-        // 如果a[0]>10 每一位都要往後放一位
-        // if (a[0] >= 10)
-        // {
-        //     for (int i = 498; i >= 0; i--)
-        //     {
-        //         a[i + 1] = a[i];
-        //     }
-        // }
+        switch (operator)
+        {
+        case '+':
+            solvearrays(a, b);
+            add(a, b, ans);
+            break;
+        case '-':
+            substract(a, b, ans);
+            break;
+        default:
+            break;
+        }
     }
     return 0;
 }
