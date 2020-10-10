@@ -25,59 +25,93 @@ int main()
     int numbers;
     // printf("how many q: ");
     scanf("%d", &numbers);
-    int red, white, yellow, black;
-    int poisson, Initial_KG;
+    long long int red, white, yellow, black;
+    long long int poisson, Initial_KG;
     int doo = 0; // 中毒的變數
     for (int i = 0; i < numbers; i++)
     {
+        doo = 0;
+        int die = 0;
         char buf[1000];
         // printf("input kg:\n");
-        scanf("%d%d%d%d%d%d", &red, &white, &yellow, &black, &poisson, &Initial_KG);
+        scanf("%lld%lld%lld%lld%lld%lld", &red, &white, &yellow, &black, &poisson, &Initial_KG);
         char c = getchar(); // 拿來擋換行
         // printf("input radish : ");
         gets(buf);
-        puts(buf);
+        // puts(buf);
         for (int i = 0; i < strlen(buf); i++)
         {
-            switch (buf[i])
-            {
-            case '1':
-                Initial_KG -= doo * poisson;
+            if (die == 0)
+                switch (buf[i])
+                {
+                case '0': // 沒吃東西靠北忘記加= =
 
-                Initial_KG += red;
-                break;
-            case '2':
-                Initial_KG -= doo * poisson;
+                    Initial_KG -= (doo * poisson);
+                    if (Initial_KG <= 0)
+                    {
+                        die = 1;
+                        printf("bye~Rabbit\n");
+                        break;
+                    }
+                    break;
+                case '1':
 
-                Initial_KG += white;
-                break;
-            case '3':
-                Initial_KG -= doo * poisson;
+                    Initial_KG -= (doo * poisson);
 
-                Initial_KG -= yellow;
-                break;
-            case '4':
-                Initial_KG -= doo * poisson;
-                Initial_KG -= black;
-                doo++;
-                break;
-            case ' ':
-                break;
-            default:
-                break;
-            }
-            printf("today is %c ", buf[i]);
-            printf("now kg is %d\n", Initial_KG);
-            printf("doo now is %d\n", doo);
+                    if (Initial_KG <= 0)
+                    {
+                        die = 1;
+                        printf("bye~Rabbit\n");
+                        break;
+                    }
+                    Initial_KG += red;
+                    break;
+                case '2':
 
-            if (Initial_KG <= 0)
-            {
-                printf("bye~Rabbit\n");
-                break;
-            }
+                    Initial_KG -= (doo * poisson);
+
+                    if (Initial_KG <= 0)
+                    {
+                        die = 1;
+                        printf("bye~Rabbit\n");
+                        break;
+                    }
+                    Initial_KG += white;
+
+                    break;
+                case '3':
+
+                    Initial_KG -= (doo * poisson);
+                    Initial_KG -= yellow;
+
+                    if (Initial_KG <= 0)
+                    {
+                        die = 1;
+                        printf("bye~Rabbit\n");
+                        break;
+                    }
+                    break;
+                case '4':
+
+                    Initial_KG -= (doo * poisson);
+
+                    Initial_KG -= black;
+                    if (Initial_KG <= 0)
+                    {
+                        die = 1;
+                        printf("bye~Rabbit\n");
+                        break;
+                    }
+                    doo++;
+
+                    break;
+
+                default:
+                    break;
+                }
         }
         if (Initial_KG > 0)
-            printf("%dg\n", Initial_KG);
+            printf("%lldg\n", Initial_KG);
     }
 
     return 0;
