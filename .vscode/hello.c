@@ -1,8 +1,14 @@
 #include <stdio.h>
-int main()
+#include <string.h>
+int main(void)
 {
-  int a = 0;
-  scanf("%d", &a);
-  printf("%d", a);
-  return 0;
+    char str[20];
+
+    puts("請輸入字串：");
+    gets(str);
+    for (int i = 0; i < strlen(str); i += 2)
+    {
+        printf("%c", str[i]);
+    }
+    return 0;
 }
