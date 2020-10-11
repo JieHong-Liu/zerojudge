@@ -56,6 +56,8 @@ int main()
                     if (password[i] == test[j])
                     {
                         B++;
+                        test[j] = -1; // 比過的就不要比了好嗎= =
+                        password[i] = -10;
                         break;
                     }
                 }
