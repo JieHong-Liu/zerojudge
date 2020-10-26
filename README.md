@@ -21,12 +21,12 @@ Online Judge: https://zerojudge.tw/
 
     1. 在C語言，有可能是因為測資的關係，假如他有多筆測資，一開始輸入的時候最好寫成
     ```
-    int var
-    while(scanf("%d", &var) != EOF )
-    {
-        your code...
-    }
+        int var
+        while(scanf("%d", &var) != EOF )
+        {
+            your code...
+        }
     ```
     通常這樣就可以避免這個問題><
-    
+
 ### 以後遇到再更新
