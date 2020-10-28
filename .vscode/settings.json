@@ -15,5 +15,9 @@
         "valarray": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled",
+<<<<<<< HEAD
     "python.pythonPath": "C:\\Users\\jieho\\Documents\\python3.8.1\\python.exe"
+=======
+    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3"
+>>>>>>> 1d37cd9fdfa2a76b18c88caf713ea91c9f9c755c
 }

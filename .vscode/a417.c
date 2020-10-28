@@ -9,16 +9,14 @@ M為方向，M=1為順時鐘，M=2為逆時鐘
 
 N範圍為1~100之間 
 
-
-把矩陣輸出，矩陣值之間寬度為5，就是[00000]寬度
-
-C++可用setw(5)或C的%5d輸出
+C用%5d輸出
 
 */
 #include <stdio.h>
-void direction(int angle, int M)
+int direction(int angle, int M)
 {
     if (M == 1)
+<<<<<<< HEAD
     {
         angle = (angle + 270) % 360;
     }
@@ -26,7 +24,14 @@ void direction(int angle, int M)
     {
         angle = (angle + 90) % 360;
     }
+=======
+        return (angle - 90 + 360) % 360;
+    else
+        return (angle + 90 + 360) % 360;
+>>>>>>> 1d37cd9fdfa2a76b18c88caf713ea91c9f9c755c
 }
+int movei(int angle);
+int movej(int angle);
 
 int main()
 {
@@ -37,6 +42,8 @@ int main()
     {
         scanf("%d%d", &N, &M); // input N and M
         int array[N][N];
+        int angle;
+        int next_i, next_j;
         // clear the array
         for (int i = 0; i < N; i++)
         {
@@ -45,18 +52,18 @@ int main()
                 array[i][j] = 0;
             }
         }
-        int angle;
-        if (M == 1) // M = 1為順時鐘
+        if (M == 1)
         {
             angle = 0;
         }
-        else if (M == 2)
+        else
         {
             angle = 270;
         }
         int i = 0, j = 0;
         for (int count = 1; count <= N * N; count++)
         {
+<<<<<<< HEAD
             printf("count now is %d\n angle is %d\n", count, angle);
             if (j + 1 >= N || i + 1 >= N || i - 1 < 0 || j - 1 < 0)
             {
@@ -78,7 +85,19 @@ int main()
             case 270:
                 i++;
                 break;
+=======
+            array[i][j] = count;
+            next_i = i + movei(angle);
+            next_j = j + movej(angle);
+            if (array[next_i][next_j] != 0 || next_i >= N || next_j >= N || next_i < 0 || next_j < 0)
+            {
+                angle = direction(angle, M);
+                next_i = i + movei(angle);
+                next_j = j + movej(angle);
+>>>>>>> 1d37cd9fdfa2a76b18c88caf713ea91c9f9c755c
             }
+            i = next_i;
+            j = next_j;
         }
         // print array
         for (int k = 0; k < N; k++)
@@ -92,4 +111,40 @@ int main()
     }
 
     return 0;
+}
+
+int movej(int angle)
+{
+    switch (angle)
+    {
+    case 0:
+        return 1;
+    case 90:
+        return 0;
+    case 180:
+        return -1;
+    case 270:
+        return 0;
+    default:
+        return 0;
+        break;
+    }
+}
+
+int movei(int angle)
+{
+    switch (angle)
+    {
+    case 0:
+        return 0;
+    case 90:
+        return -1;
+    case 180:
+        return 0;
+    case 270:
+        return 1;
+    default:
+        return 0;
+        break;
+    }
 }
