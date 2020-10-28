@@ -19,9 +19,13 @@ C++可用setw(5)或C的%5d輸出
 void direction(int angle, int M)
 {
     if (M == 1)
+    {
         angle = (angle + 270) % 360;
+    }
     else if (M == 2)
+    {
         angle = (angle + 90) % 360;
+    }
 }
 
 int main()
@@ -53,28 +57,27 @@ int main()
         int i = 0, j = 0;
         for (int count = 1; count <= N * N; count++)
         {
-            if (array[i][j] != 0)
+            printf("count now is %d\n angle is %d\n", count, angle);
+            if (j + 1 >= N || i + 1 >= N || i - 1 < 0 || j - 1 < 0)
             {
+                printf("call me \n");
                 direction(angle, M);
             }
-            else
+            array[i][j] = count;
+            switch (angle)
             {
-                array[i][j] = count;
-                switch (angle)
-                {
-                case 0:
-                    j++;
-                    break;
-                case 90:
-                    i--;
-                    break;
-                case 180:
-                    j--;
-                    break;
-                case 270:
-                    i++;
-                    break;
-                }
+            case 0:
+                j++;
+                break;
+            case 90:
+                i--;
+                break;
+            case 180:
+                j--;
+                break;
+            case 270:
+                i++;
+                break;
             }
         }
         // print array
