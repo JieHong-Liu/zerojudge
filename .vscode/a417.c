@@ -16,19 +16,9 @@ C用%5d輸出
 int direction(int angle, int M)
 {
     if (M == 1)
-<<<<<<< HEAD
-    {
-        angle = (angle + 270) % 360;
-    }
-    else if (M == 2)
-    {
-        angle = (angle + 90) % 360;
-    }
-=======
         return (angle - 90 + 360) % 360;
     else
         return (angle + 90 + 360) % 360;
->>>>>>> 1d37cd9fdfa2a76b18c88caf713ea91c9f9c755c
 }
 int movei(int angle);
 int movej(int angle);
@@ -63,29 +53,6 @@ int main()
         int i = 0, j = 0;
         for (int count = 1; count <= N * N; count++)
         {
-<<<<<<< HEAD
-            printf("count now is %d\n angle is %d\n", count, angle);
-            if (j + 1 >= N || i + 1 >= N || i - 1 < 0 || j - 1 < 0)
-            {
-                printf("call me \n");
-                direction(angle, M);
-            }
-            array[i][j] = count;
-            switch (angle)
-            {
-            case 0:
-                j++;
-                break;
-            case 90:
-                i--;
-                break;
-            case 180:
-                j--;
-                break;
-            case 270:
-                i++;
-                break;
-=======
             array[i][j] = count;
             next_i = i + movei(angle);
             next_j = j + movej(angle);
@@ -94,7 +61,6 @@ int main()
                 angle = direction(angle, M);
                 next_i = i + movei(angle);
                 next_j = j + movej(angle);
->>>>>>> 1d37cd9fdfa2a76b18c88caf713ea91c9f9c755c
             }
             i = next_i;
             j = next_j;
