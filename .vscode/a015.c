@@ -7,7 +7,6 @@ int main()
     while (scanf("%d%d", &m, &n) != EOF)
     {
         int array1[m][n];
-        int array2[n][m];
         for (int row = 0; row < m; row++)
         {
             for (int col = 0; col < n; col++)

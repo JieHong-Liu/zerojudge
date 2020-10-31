@@ -1,5 +1,5 @@
 # 從zerojudge學習Computer Science 
-( Data structure & Algorithm)
+(Data structure & Algorithm)
 ---
 ## Data Structure
 
@@ -12,3 +12,8 @@
     
     題目：
     1. a524(手機之謎)  
+
+## Knowledge of computer science
+
++ 浮點數誤差
+    + 題目a647: 投資專家

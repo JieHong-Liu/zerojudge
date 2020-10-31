@@ -26,48 +26,32 @@ int main()
         {
             if (profit >= 0)
             {
-                int carry = (profit * 10000);
-                if (carry % 10 >= 5)
-                {
-                    profit += 0.00005;
-                }
+                profit += 0.0000001;
+
                 printf("%.2lf%%", profit);
             }
             else if (profit < 0)
             {
-                int carry = (profit * 10000);
-                if (carry % 10 <= -5)
-                {
-                    profit -= 0.00005;
-                }
+                profit -= 0.0000001;
+
                 printf("%.2lf%%", profit);
             }
             printf(" dispose\n");
-            // printf("all = %.2lf%%\n", profit);
         }
         else
         {
             if (profit >= 0)
             {
-
-                int carry = (profit * 10000);
-                if (carry % 10 >= 5)
-                {
-                    profit += 0.00005;
-                }
+                profit += 0.0000001;
                 printf("%.2lf%%", profit);
             }
             else if (profit < 0)
             {
-                int carry = (profit * 10000);
-                if (carry % 10 <= -5)
-                {
-                    profit -= 0.00005;
-                }
+                profit -= 0.0000001;
+
                 printf("%.2lf%%", profit);
             }
             printf(" keep\n");
-            // printf("all = %.2lf%%\n", profit);
         }
     }
 
