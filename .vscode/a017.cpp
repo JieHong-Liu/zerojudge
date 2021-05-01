@@ -6,11 +6,16 @@ using std::stringstream;
 // using postfix algorithm.
 
 int weight_calculator(char c);
+void infix_to_postfix(string input_str, string output_str, stack<char> &op)
+{
+    cout << "fuck!\n";
+}
 
 int main()
 {
 
     stack<char> op;
+    stack<int> result_stack;
     string input_str;
     stringstream postfix_str;
     string output_str;
@@ -19,7 +24,11 @@ int main()
     postfix_str.clear();
 
     getline(cin, input_str); // read input one line.
-    cout << "The size of input string is : " << input_str.length() << '\n';
+
+    infix_to_postfix(input_str, output_str, op);
+
+    cout
+        << "The size of input string is : " << input_str.length() << '\n';
 
     for (int i = 0; i < input_str.length(); i++)
     {
@@ -29,8 +38,7 @@ int main()
         }
         else if (input_str.at(i) >= '0' && input_str.at(i) <= '9')
         {
-            postfix_str << input_str.at(i);
-            postfix_str << ' ';
+            postfix_str << input_str.at(i) << ' ';
             // cout << input_str.at(i) << " is added into postfix str" << endl;
         }
         else // not ' ' and not 0~9.
@@ -44,7 +52,7 @@ int main()
             {
                 while (op.top() != '(')
                 {
-                    postfix_str << op.top();
+                    postfix_str << op.top() << ' ';
                     op.pop();
                 }
                 op.pop(); // remove the '('
@@ -59,7 +67,7 @@ int main()
                 while (weight_calculator(op.top()) > weight_calculator(input_str.at(i)))
                 {
                     // cout << op.top() << " is added into postfix str" << endl;
-                    postfix_str << op.top();
+                    postfix_str << op.top() << ' ';
                     op.pop();
                 }
                 op.push(input_str.at(i));
@@ -69,7 +77,7 @@ int main()
     }
     while (!op.empty())
     {
-        postfix_str << op.top();
+        postfix_str << op.top() << ' ';
         op.pop();
     }
     while (postfix_str)
@@ -78,7 +86,7 @@ int main()
         postfix_str >> tmp_str;
         output_str = output_str + " " + tmp_str;
     }
-    cout << "the output : " << output_str << endl;
+    cout << "the output :" << output_str << endl;
 
     return 0;
 }
