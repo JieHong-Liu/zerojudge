@@ -4,9 +4,7 @@
 #include <queue>
 
 using namespace std;
-using std::stringstream;
 // using postfix algorithm.
-
 int weight_calculator(char c);
 
 int main()
@@ -17,7 +15,6 @@ int main()
     queue<string> postfix_queue;
 
     string input_str;
-    string output_str;
     string token;
 
     while (getline(cin, input_str))
