@@ -74,10 +74,48 @@ int main()
 
         while (!postfix_queue.empty())
         {
-            cout << postfix_queue.front() << " ";
+            // cout << postfix_queue.front() << " ";
+            if (weight_calculator(postfix_queue.front()[0]) == -1) // not operator -> a number.
+            {
+                istringstream iss(postfix_queue.front());
+                long long int value;
+                iss >> value;
+                result_stack.push(value); // push the value into the stack.
+            }
+            else // met operator.
+            {
+                int tmp_left, tmp_right;
+                tmp_right = result_stack.top();
+                result_stack.pop();
+                tmp_left = result_stack.top();
+                result_stack.pop();
+                int result = 0;
+                switch (postfix_queue.front()[0])
+                {
+                case '+':
+                    result = tmp_left + tmp_right;
+                    break;
+                case '-':
+                    result = tmp_left - tmp_right;
+                    break;
+                case '*':
+                    result = tmp_left * tmp_right;
+                    break;
+                case '/':
+                    result = tmp_left / tmp_right;
+                    break;
+                case '%':
+                    result = tmp_left % tmp_right;
+                    break;
+                default:
+                    result = 0;
+                    break;
+                }
+                result_stack.push(result); // push the result back to the stack.
+            }
             postfix_queue.pop();
         }
-        cout << endl;
+        cout << result_stack.top() << endl;
     }
 
     return 0;
