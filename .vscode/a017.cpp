@@ -1,92 +1,84 @@
 #include <iostream>
 #include <sstream>
 #include <stack>
+#include <queue>
+
 using namespace std;
 using std::stringstream;
 // using postfix algorithm.
 
 int weight_calculator(char c);
-void infix_to_postfix(string input_str, string output_str, stack<char> &op)
-{
-    cout << "fuck!\n";
-}
 
 int main()
 {
 
     stack<char> op;
     stack<int> result_stack;
+    queue<string> postfix_queue;
+
     string input_str;
-    stringstream postfix_str;
     string output_str;
-    // clean the stringstream
-    postfix_str.str("");
-    postfix_str.clear();
+    string token;
 
-    getline(cin, input_str); // read input one line.
-
-    infix_to_postfix(input_str, output_str, op);
-
-    cout
-        << "The size of input string is : " << input_str.length() << '\n';
-
-    for (int i = 0; i < input_str.length(); i++)
+    while (getline(cin, input_str))
     {
-        if (input_str.at(i) == ' ')
+        istringstream iss(input_str);
+        while (iss >> token)
         {
-            continue;
-        }
-        else if (input_str.at(i) >= '0' && input_str.at(i) <= '9')
-        {
-            postfix_str << input_str.at(i) << ' ';
-            // cout << input_str.at(i) << " is added into postfix str" << endl;
-        }
-        else // not ' ' and not 0~9.
-        {
-            if (input_str.at(i) == '(')
+            // 對 token 進行解析
+            if (weight_calculator(token[0]) == -1) // not operator
             {
-                // cout << "The ( is pushed into the stack!\n";
-                op.push(input_str.at(i));
+                postfix_queue.push(token);
             }
-            else if (input_str.at(i) == ')')
+            else // is operator.
             {
-                while (op.top() != '(')
+                if (token[0] == '(')
                 {
-                    postfix_str << op.top() << ' ';
-                    op.pop();
+                    op.push(token[0]); // push '(' into the stack.
                 }
-                op.pop(); // remove the '('
-            }
-            else if (op.empty() || weight_calculator(input_str.at(i)) > weight_calculator(op.top()))
-            {
-                // cout << "The" << input_str.at(i) << "is pushed into the stack!\n";
-                op.push(input_str.at(i));
-            }
-            else if (weight_calculator(input_str.at(i)) <= weight_calculator(op.top()))
-            {
-                while (weight_calculator(op.top()) > weight_calculator(input_str.at(i)))
+                else if (token[0] == ')')
                 {
-                    // cout << op.top() << " is added into postfix str" << endl;
-                    postfix_str << op.top() << ' ';
-                    op.pop();
+                    while (op.top() != '(')
+                    {
+                        string tmp_str(1, op.top());
+                        postfix_queue.push(tmp_str);
+                        op.pop();
+                    }
+                    op.pop(); // remove the '('
                 }
-                op.push(input_str.at(i));
-                // cout << "The" << input_str.at(i) << "is pushed into the stack!\n";
+                else if (op.empty() || weight_calculator(token[0]) > weight_calculator(op.top()))
+                {
+                    // cout << "The" << input_str.at(i) << "is pushed into the stack!\n";
+                    op.push(token[0]);
+                }
+                else if (weight_calculator(token[0]) <= weight_calculator(op.top()))
+                {
+                    while (!op.empty() && (weight_calculator(op.top()) >= weight_calculator(token[0])))
+                    {
+                        // cout << op.top() << " is added into postfix str" << endl;
+                        string tmp_str(1, op.top());
+                        postfix_queue.push(tmp_str);
+                        op.pop();
+                    }
+                    op.push(token[0]);
+                    // cout << "The" << input_str.at(i) << "is pushed into the stack!\n";
+                }
             }
         }
+        while (!op.empty())
+        {
+            string tmp_str(1, op.top());
+            postfix_queue.push(tmp_str);
+            op.pop();
+        } // when the program runs here, the queue should be ready to analyze.
+
+        while (!postfix_queue.empty())
+        {
+            cout << postfix_queue.front() << " ";
+            postfix_queue.pop();
+        }
+        cout << endl;
     }
-    while (!op.empty())
-    {
-        postfix_str << op.top() << ' ';
-        op.pop();
-    }
-    while (postfix_str)
-    {
-        string tmp_str = "";
-        postfix_str >> tmp_str;
-        output_str = output_str + " " + tmp_str;
-    }
-    cout << "the output :" << output_str << endl;
 
     return 0;
 }
